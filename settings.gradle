@@ -1,0 +1,5 @@
+rootProject.name = 'microservices_prototype'
+include 'validation_service'
+include 'booking_service'
+include 'discovery_server'
+

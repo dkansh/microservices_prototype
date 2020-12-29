@@ -1,0 +1,11 @@
+server:
+  port: ${PORT:8201}
+
+spring:
+  application:
+    name: booking-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${discovery.server.url:http://127.0.0.1:8001}/eureka/
