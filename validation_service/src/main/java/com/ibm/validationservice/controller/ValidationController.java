@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class ValidationController {
     ValidationService validationService;
 
     @PostMapping
-    public ResponseEntity<BookingResponseVO> bookTicket(BookingRequestVO bookingRequest) throws DataMappingException, InvalidBookingDateException {
+    public ResponseEntity<BookingResponseVO> bookTicket(@RequestBody BookingRequestVO bookingRequest) throws DataMappingException, InvalidBookingDateException {
         return ResponseEntity.ok(validationService.validateAndBookTicket(bookingRequest));
     }
 }

@@ -18,11 +18,8 @@ ext {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.6.RELEASE'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

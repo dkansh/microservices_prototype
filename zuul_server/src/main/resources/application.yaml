@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8301}
+
+spring:
+  application:
+    name: zuul-server
+
+kafka:
+  validation:
+    topic: Booking
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+zuul:
+  routes:
+    booking-service:
+      path: /booking/**
+      serviceId: booking-service
+    validation-service:
+      path: /validation/**
+      serviceId: validation-service
+
+booking-service:
+  ribbon:
+    listOfServers: localhost:8201, localhost:8202, localhost:8203
+
+validation-service:
+  ribbon:
+    listOfServers: localhost:8101, localhost:8102, localhost:8103

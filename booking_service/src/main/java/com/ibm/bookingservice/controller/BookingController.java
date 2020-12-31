@@ -1,7 +1,7 @@
 package com.ibm.bookingservice.controller;
 
+import com.ibm.bookingservice.api.service.BookingService;
 import com.ibm.bookingservice.exception.BookingNotAvailableException;
-import com.ibm.bookingservice.service.BookingService;
 import com.ibm.bookingservice.vo.BookingVO;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

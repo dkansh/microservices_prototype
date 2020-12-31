@@ -1,6 +1,10 @@
 package com.ibm.bookingservice.vo;
 
-import com.ibm.bookingservice.constant.BookingStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.ibm.bookingservice.entity.Booking;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,16 +18,22 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BookingVO {
     Long bookingId;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     LocalDate startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     LocalDate endDate;
     String personName;
-    BookingStatus bookingStatus;
+    String status;
 
     public BookingVO(Booking booking) {
         this.bookingId = booking.getBookingId();
         this.startDate = booking.getStartDate();
         this.endDate = booking.getEndDate();
         this.personName = booking.getPersonName();
-        this.bookingStatus = booking.getBookingStatus();
+        this.status = booking.getStatus();
     }
 }

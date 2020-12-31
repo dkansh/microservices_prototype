@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+#  zookeeper-server:
+#    image: bitnami/zookeeper:latest
+#    ports:
+#      - 2181:2181
+#    networks:
+#      - my-microservices-network
+#    restart: always
+#    environment:
+#      ALLOW_ANONYMOUS_LOGIN: 'yes'
+#
+#  kafka-server:
+#    image: bitnami/kafka:latest
+#    ports:
+#      - 9092:9092
+#    networks:
+#      - my-microservices-network
+#    restart: always
+#    environment:
+#      ALLOW_PLAINTEXT_LISTENER: 'yes'
+#      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-server:2181
+#
+#  cassandra:
+#    image: cassandra:latest
+#    ports:
+#      - 9042:9042
+#    networks:
+#      - my-microservices-network
+#
+#  cqlsh:
+#    image: cassandra:latest
+#    networks:
+#      - my-microservices-network
+#    restart: always
+#    depends_on:
+#      - cassandra
+#
+  discovery_server:
+    image: discovery_server:latest
+    ports:
+    - 8761:8761
+    networks:
+      - my-microservices-network
+    restart: always
+
+  zuul_server:
+    image: zuul_server:latest
+    ports:
+      - 8301:8301
+    networks:
+      - my-microservices-network
+    restart: always
+    depends_on:
+      - discovery_server
+
+  validation_service:
+    image: validation_service:latest
+    networks:
+      - my-microservices-network
+    restart: always
+    depends_on:
+      - discovery_server
+      - zuul_server
+
+#  booking_service:
+#    image: booking_service:latest
+#    depends_on:
+#      - discovery_server
+#      - zuul_server
+#      - cassandra
+#      - zookeeper-server
+#      - kafka-server
+#    networks:
+#      - my-microservices-network
+#    restart: always
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_DATABASE=test
+#      - MYSQL_PASSWORD=root
+
+networks:
+  my-microservices-network:

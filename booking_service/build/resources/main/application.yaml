@@ -4,8 +4,32 @@ server:
 spring:
   application:
     name: booking-service
+  kafka:
+    consumer:
+      bootstrap-servers: ${PRODUCER_BOOTSTRAP_SERVER:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: bookingSystem
+      auto-offset-reset: earliest
+      max-poll-records: 100
+  data:
+    cassandra:
+      contact-points: ${CASSANDRA_HOST:127.0.0.1}
+      keyspace-name: booking
+      port: ${CASSANDRA_PORT:9042}
+      local-datacenter: datacenter1
+#      schema-action: NONE
 
 eureka:
   client:
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
-      defaultZone: ${discovery.server.url:http://127.0.0.1:8001}/eureka/
+      defaultZone: ${DISCOVERY_SERVER_URL:http://127.0.0.1:8761}/eureka/
+  instance:
+    preferIpAddress: true
+    hostname: localhost
+
+kafka:
+  booking:
+    topic: Booking

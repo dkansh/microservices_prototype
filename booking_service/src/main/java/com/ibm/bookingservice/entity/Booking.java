@@ -1,6 +1,5 @@
 package com.ibm.bookingservice.entity;
 
-import com.ibm.bookingservice.constant.BookingStatus;
 import com.ibm.bookingservice.vo.BookingVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,13 +21,13 @@ public class Booking {
     LocalDate startDate;
     LocalDate endDate;
     String personName;
-    BookingStatus bookingStatus;
+    String status;
 
     public Booking(BookingVO bookingVO) {
         this.bookingId = bookingVO.getBookingId();
         this.startDate = bookingVO.getStartDate();
         this.endDate = bookingVO.getEndDate();
         this.personName = bookingVO.getPersonName();
-        this.bookingStatus = bookingVO.getBookingStatus();
+        this.status = bookingVO.getStatus();
     }
 }
